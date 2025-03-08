@@ -1,0 +1,27 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:5
+    container_name: mongo_container
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - \"27017:27017\"
+
+  license_server:
+    build: .
+    container_name: license_server
+    restart: always
+    ports:
+      - \"80:80\"
+    environment:
+      MONGO_URI: \"mongodb://root:example@mongo:27017/licensing?authSource=admin\"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
