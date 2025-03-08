@@ -17,9 +17,9 @@ services:
     container_name: license_server
     restart: always
     ports:
-      - \"80:80\"
+      - "80:80"
     environment:
-      MONGO_URI: \"mongodb://root:example@mongo:27017/licensing?authSource=admin\"
+      MONGO_URI: "mongodb://root:example@mongo:27017/licensing?authSource=admin"
     depends_on:
       - mongo
 
